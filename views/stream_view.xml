@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+      <record id="view_rl_link_tree" model="ir.ui.view">
+            <field name="name">rl.links.tree</field>
+            <field name="model">rl.links</field>
+            <field name="priority" eval="5"/>
+            <field name="arch" type="xml">
+                <tree string="Link">
+                    <field name="name"/>
+                    <field name="url"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_rl_link_form" model="ir.ui.view">
+            <field name="name">rl.links.form</field>
+            <field name="model">rl.links</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Links">
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="url" widget="url"/>
+                            <field name="desc"/>
+                            <field name="source"/>
+                            <field name="subject_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_rl_stream_form" model="ir.ui.view">
+            <field name="name">op.subject.form</field>
+            <field name="model">op.subject</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_subject_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="inside">
+                    <field name="subject_book_name" placeholder="Multiple names with comma"/>
+                    <field name="subject_tag" placeholder="SubjectTags separated by comma"/>
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <button string="Get Material" type="object" name="generate_materials" class="oe_highlight"/>
+                    <notebook>
+                        <page string="Google Links">
+                            <field name="google_link_ids"></field>
+                        </page>
+                        <page string="Youtube Links">
+                            <field name="youtube_link_ids"></field>
+                        </page>
+                        <page string="Book Links">
+                            <field name="amazon_link_ids"></field>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
